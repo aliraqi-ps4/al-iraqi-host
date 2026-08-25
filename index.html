@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" manifest="cache.appcache">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مركز العراقي لخدمات البلايستيشن - منصة التفعيل</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; }
+  body {
+    min-height: 100vh;
+    background: #080c14;
+    color: #f0f4f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* الخلفية والتأثيرات */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(0, 162, 255, 0.15), rgba(5, 8, 15, 0.95));
+    z-index: 0;
+  }
+
+  #container {
+    width: 92%;
+    max-width: 850px;
+    padding: 40px 30px;
+    background: rgba(13, 20, 33, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 28px;
+    border: 1px solid rgba(0, 162, 255, 0.25);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 162, 255, 0.1);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 162, 255, 0.6);
+    margin-bottom: 8px;
+  }
+
+  header .tagline {
+    font-size: 18px;
+    color: #8ab4f8;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+
+  .card {
+    background: rgba(6, 10, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+  }
+
+  #status {
+    font-size: 26px;
+    font-weight: 700;
+    color: #e1f5fe;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(0, 162, 255, 0.4);
+  }
+
+  #info-panel {
+    font-size: 18px;
+    color: #b0bec5;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+
+  #info-panel b { color: #00e676; }
+  .chip {
+    background: rgba(0, 162, 255, 0.2);
+    color: #4fc3f7;
+    padding: 3px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 162, 255, 0.4);
+    font-size: 16px;
+  }
+
+  #cache-status {
+    font-size: 15px;
+    color: #78909c;
+    margin-top: 10px;
+  }
+
+  /* ألوان الحالات */
+  .ok { color: #00e676 !important; }
+  .warn { color: #ffd54f !important; }
+  .error { color: #ff5252 !important; }
+
+  /* المؤشر المتحرك */
+  .loader {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    background: #00a2ff;
+    border-radius: 50%;
+    animation: pulse 1.4s infinite ease-in-out;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes pulse {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1.2); opacity: 1; }
+  }
+
+  footer {
+    position: fixed;
+    bottom: 15px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div id="container">
+  <header>
+    <h1>مركز العراقي</h1>
+    <div class="tagline">لخدمات وصيانة أجهزة البلايستيشن الاحترافية</div>
+  </header>
+
+  <div class="card">
+    <div id="status">جارٍ فحص النظام...</div>
+    <div id="info-panel">معلومات الجهاز: <span id="details">جارٍ القراءة...</span></div>
+    <div id="cache-status">التخزين المؤقت: جارٍ التحقق...</div>
+
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<footer>AL-IRAQI PLAYSTATION SERVICES • AUTOMATIC EXPLOIT HOST</footer>
+
+<script>
+(function() {
+  var statusEl = document.getElementById("status");
+  var detailsEl = document.getElementById("details");
+  var cacheEl = document.getElementById("cache-status");
+
+  function setStatus(msg, cls) {
+    statusEl.innerHTML = msg;
+    statusEl.className = cls || "";
+  }
+
+  // كشف الإصدار الثابت لمتصفح PS4
+  var ua = navigator.userAgent;
+  var match = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(ua);
+  var fwKey = null, fwNum = 0;
+
+  if (match) {
+    var minorHex = parseInt(match[2], 16).toString(16);
+    if (minorHex.length < 2) minorHex = "0" + minorHex;
+    fwKey = match[1] + "." + minorHex;
+    fwNum = parseInt(match[1], 10) * 100 + parseInt(minorHex, 10);
+  }
+
+  // دعم التجاوز اليدوي (URL Parameters)
+  var params = new URLSearchParams(location.search);
+  var forcedBug = params.get("bug");
+  var bug = null, reason = "";
+
+  if (forcedBug) {
+    bug = forcedBug;
+    reason = "تحديد يدوي: " + forcedBug;
+  } else if (!fwKey) {
+    reason = "متصفح غير معروف أو ليس PS4";
+  } else if (fwNum <= 1202) {
+    bug = "lapse";
+    reason = "تحديث " + fwKey + " (متوافق مع Lapse)";
+  } else {
+    bug = "poops";
+    reason = "تحديث " + fwKey + " (متوافق مع Poops)";
+  }
+
+  // عرض التفاصيل
+  detailsEl.innerHTML = "النظام: <b>" + (fwKey || "غير معروف") + "</b> | الثغرة: <span class='chip'>" + (bug ? bug.toUpperCase() : "لا يوجد") + "</span>";
+
+  if (!bug) {
+    setStatus("إصدار الجهاز غير مدعوم", "error");
+    return;
+  }
+
+  var targetPage = (bug === "lapse" ? "run_lapse.html" : "PS4_13.00_Webkit.html") + location.search;
+
+  function redirect() {
+    setStatus("جارٍ تشغيل الثغرة (" + bug.toUpperCase() + ")...", "warn");
+    setTimeout(function() { location.replace(targetPage); }, 1000);
+  }
+
+  // إدارة التخزين المؤقت Off-Line (AppCache)
+  var ac = window.applicationCache;
+  if (!ac || !document.documentElement.hasAttribute("manifest")) {
+    redirect();
+  } else if (ac.status === ac.UPDATEREADY) {
+    try { ac.swapCache(); } catch(e){}
+    cacheEl.textContent = "تم تحديث الملفات بنجاح.";
+    redirect();
+  } else {
+    ac.addEventListener("cached", function() {
+      cacheEl.textContent = "تم حفظ الصفحة للعمل بدون إنترنت (Offline Ready).";
+      cacheEl.className = "ok";
+      redirect();
+    });
+    ac.addEventListener("noupdate", function() {
+      cacheEl.textContent = "الملفات المحفوظة محدثة بالكامل.";
+      cacheEl.className = "ok";
+      redirect();
+    });
+    ac.addEventListener("error", function() {
+      cacheEl.textContent = "تشغيل مباشر (لم يتم التخزين أوفلاين).";
+      redirect();
+    });
+  }
+})();
+</script>
+</body>
+</html>
