@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" manifest="cache.appcache">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -29,9 +29,29 @@
   <span class="phones">01006815002 - 01013321226</span>
 </div>
 <div id="wrap">
-  <div id="state">loading poops chain...</div>
+  <div id="state">jarii tahmil poops chain...</div>
   <div id="out"></div>
 </div>
+
+<script>
+  // متابعة حالة التخزين أوفلاين من المتصفح
+  const stateEl = document.getElementById("state");
+  const outEl = document.getElementById("out");
+
+  if (window.applicationCache) {
+    window.applicationCache.addEventListener('cached', () => {
+      stateEl.innerHTML = "<span class='ok'>تم حفظ الهوست أوفلاين بنجاح!</span>";
+    });
+    window.applicationCache.addEventListener('noupdate', () => {
+      stateEl.innerHTML = "loading poops chain...";
+    });
+    window.applicationCache.addEventListener('error', () => {
+      // في حالة العمل أوفلاين بالكامل مسبقاً
+      stateEl.innerHTML = "loading poops chain (Offline Mode)...";
+    });
+  }
+</script>
+
 <script type="module">import "./chain_poops.js";</script>
 </body>
 </html>

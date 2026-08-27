@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# v1.0 - مركز العراقى لخدمات البلايستيشن
+
+index.html
+run_poops.html
+run_lapse.html
+chain_poops.js
+chain_lapse.js
+logo_raw.png
+
+NETWORK:
+*
