@@ -1,484 +1,243 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" manifest="cache.appcache">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>العراقي | البوابة الاحترافية لتشغيل البلايستيشن</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Tahoma', system-ui, -apple-system, sans-serif;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مركز العراقي لخدمات البلايستيشن - منصة التفعيل</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; }
+  body {
+    min-height: 100vh;
+    background: #080c14;
+    color: #f0f4f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
 
-        body {
-            min-height: 100vh;
-            background: #0b0f17;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding: 20px;
-        }
+  /* الخلفية والتأثيرات */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(0, 162, 255, 0.15), rgba(5, 8, 15, 0.95));
+    z-index: 0;
+  }
 
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background-image:
-                radial-gradient(2px 2px at 20px 30px, #00a2ff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 40px 70px, #00d4ff, rgba(0, 0, 0, 0)),
-                radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 130px 80px, #00a2ff, rgba(0, 0, 0, 0));
-            background-size: 200px 200px;
-            background-repeat: repeat;
-            opacity: 0.3;
-            animation: moveParticles 20s linear infinite;
-        }
+  #container {
+    width: 92%;
+    max-width: 850px;
+    padding: 40px 30px;
+    background: rgba(13, 20, 33, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 28px;
+    border: 1px solid rgba(0, 162, 255, 0.25);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 162, 255, 0.1);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
 
-        @keyframes moveParticles {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(-100px, -100px);
-            }
-        }
+  header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 162, 255, 0.6);
+    margin-bottom: 8px;
+  }
 
-        #container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 800px;
-            background: rgba(10, 16, 28, 0.85);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-radius: 40px;
-            border: 1px solid rgba(0, 162, 255, 0.2);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 162, 255, 0.05);
-            padding: 40px 32px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
+  header .tagline {
+    font-size: 18px;
+    color: #8ab4f8;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 6px;
-        }
+  .card {
+    background: rgba(6, 10, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+  }
 
-        .brand-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #00a2ff, #0077be);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 900;
-            color: #fff;
-            box-shadow: 0 0 30px rgba(0, 162, 255, 0.3);
-        }
+  #status {
+    font-size: 26px;
+    font-weight: 700;
+    color: #e1f5fe;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(0, 162, 255, 0.4);
+  }
 
-        h1 {
-            font-size: 38px;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: -0.5px;
-            text-shadow: 0 0 20px rgba(0, 162, 255, 0.2);
-        }
+  #info-panel {
+    font-size: 18px;
+    color: #b0bec5;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
 
-        .sub-title {
-            color: #7a9bcb;
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            margin-bottom: 28px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            padding-bottom: 12px;
-        }
+  #info-panel b { color: #00e676; }
+  .chip {
+    background: rgba(0, 162, 255, 0.2);
+    color: #4fc3f7;
+    padding: 3px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 162, 255, 0.4);
+    font-size: 16px;
+  }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
+  #cache-status {
+    font-size: 15px;
+    color: #78909c;
+    margin-top: 10px;
+  }
 
-        @media (max-width: 480px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+  /* ألوان الحالات */
+  .ok { color: #00e676 !important; }
+  .warn { color: #ffd54f !important; }
+  .error { color: #ff5252 !important; }
 
-        .info-card {
-            background: rgba(0, 20, 40, 0.4);
-            border-radius: 18px;
-            padding: 16px 14px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            transition: 0.2s;
-        }
+  /* المؤشر المتحرك */
+  .loader {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    background: #00a2ff;
+    border-radius: 50%;
+    animation: pulse 1.4s infinite ease-in-out;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
 
-        .info-card .label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #5a7a9a;
-            font-weight: 600;
-        }
+  @keyframes pulse {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1.2); opacity: 1; }
+  }
 
-        .info-card .value {
-            font-size: 18px;
-            font-weight: 700;
-            color: #e8f0fe;
-            margin-top: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .value .badge {
-            background: rgba(0, 162, 255, 0.15);
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            border: 1px solid rgba(0, 162, 255, 0.2);
-            color: #4fc3f7;
-        }
-
-        .value .badge.error {
-            border-color: #ff5252;
-            color: #ff5252;
-            background: rgba(255, 82, 82, 0.1);
-        }
-
-        .value .badge.success {
-            border-color: #00e676;
-            color: #00e676;
-            background: rgba(0, 230, 118, 0.1);
-        }
-
-        .status-area {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-        }
-
-        #status-text {
-            font-size: 20px;
-            font-weight: 600;
-            color: #cfddee;
-            margin-bottom: 14px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #1a2636;
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 8px 0 12px 0;
-        }
-
-        .progress-bar .fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #00a2ff, #00e5ff);
-            border-radius: 12px;
-            transition: width 0.2s linear;
-            box-shadow: 0 0 20px rgba(0, 162, 255, 0.4);
-        }
-
-        #cache-status {
-            font-size: 13px;
-            color: #4d6a8f;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .dot-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #4d6a8f;
-            margin-left: 6px;
-        }
-        .dot-indicator.active {
-            background: #00e676;
-            box-shadow: 0 0 12px #00e676;
-            animation: blink 1s infinite;
-        }
-        .dot-indicator.error {
-            background: #ff5252;
-            box-shadow: 0 0 12px #ff5252;
-        }
-
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.2;
-            }
-        }
-
-        .footer {
-            margin-top: 28px;
-            font-size: 12px;
-            color: #2a3f5a;
-            letter-spacing: 1.5px;
-            border-top: 1px solid rgba(255, 255, 255, 0.02);
-            padding-top: 16px;
-        }
-
-        .footer span {
-            color: #00a2ff;
-            opacity: 0.5;
-        }
-
-        .btn-retry {
-            margin-top: 15px;
-            padding: 8px 24px;
-            background: rgba(0, 162, 255, 0.15);
-            border: 1px solid rgba(0, 162, 255, 0.3);
-            border-radius: 12px;
-            color: #4fc3f7;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: none;
-        }
-
-        .btn-retry:hover {
-            background: rgba(0, 162, 255, 0.25);
-        }
-    </style>
+  footer {
+    position: fixed;
+    bottom: 15px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+  }
+</style>
 </head>
 <body>
 
-    <div class="particles"></div>
+<div id="container">
+  <header>
+    <h1>مركز العراقي</h1>
+    <div class="tagline">لخدمات وصيانة أجهزة البلايستيشن الاحترافية</div>
+  </header>
 
-    <div id="container">
-        <div class="brand">
-            <div class="brand-icon">ع</div>
-            <h1>المركز العراقي</h1>
-        </div>
-        <div class="sub-title">• منصة التفعيل الاحترافية •</div>
+  <div class="card">
+    <div id="status">جارٍ فحص النظام...</div>
+    <div id="info-panel">معلومات الجهاز: <span id="details">جارٍ القراءة...</span></div>
+    <div id="cache-status">التخزين المؤقت: جارٍ التحقق...</div>
 
-        <div class="info-grid">
-            <div class="info-card">
-                <div class="label">إصدار الجهاز</div>
-                <div class="value" id="fwDisplay">غير معروف</div>
-            </div>
-            <div class="info-card">
-                <div class="label">الثغرة المعتمدة</div>
-                <div class="value" id="exploitDisplay">
-                    <span class="badge">جارٍ الكشف...</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="status-area">
-            <div id="status-text">⚡ جارٍ تهيئة بيئة التشغيل...</div>
-
-            <div class="progress-bar">
-                <div class="fill" id="progressFill"></div>
-            </div>
-
-            <div id="cache-status">
-                <span id="cacheMessage">التخزين المؤقت: غير نشط</span>
-                <span class="dot-indicator" id="cacheDot"></span>
-            </div>
-        </div>
-
-        <button class="btn-retry" id="retryBtn">🔄 محاولة يدوية</button>
-
-        <div class="footer">
-            <span>•</span> AL-IRAQI PLAYSTATION SERVICES <span>•</span> AUTOMATIC EXPLOIT HOST <span>•</span>
-        </div>
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
     </div>
+  </div>
+</div>
 
-    <script>
-        (function() {
-            'use strict';
+<footer>AL-IRAQI PLAYSTATION SERVICES • AUTOMATIC EXPLOIT HOST</footer>
 
-            const statusText = document.getElementById('status-text');
-            const fwDisplay = document.getElementById('fwDisplay');
-            const exploitDisplay = document.getElementById('exploitDisplay');
-            const progressFill = document.getElementById('progressFill');
-            const cacheMessage = document.getElementById('cacheMessage');
-            const cacheDot = document.getElementById('cacheDot');
-            const retryBtn = document.getElementById('retryBtn');
+<script>
+(function() {
+  var statusEl = document.getElementById("status");
+  var detailsEl = document.getElementById("details");
+  var cacheEl = document.getElementById("cache-status");
 
-            let progress = 0;
-            let redirectTimer = null;
-            let currentBug = null;
+  function setStatus(msg, cls) {
+    statusEl.innerHTML = msg;
+    statusEl.className = cls || "";
+  }
 
-            function updateProgress(value) {
-                progress = Math.min(value, 100);
-                progressFill.style.width = progress + '%';
-            }
+  // كشف الإصدار الثابت لمتصفح PS4
+  var ua = navigator.userAgent;
+  var match = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(ua);
+  var fwKey = null, fwNum = 0;
 
-            function setStatus(msg, type) {
-                statusText.textContent = msg;
-                if (type === 'loading') {
-                    cacheDot.className = 'dot-indicator active';
-                } else if (type === 'error') {
-                    cacheDot.className = 'dot-indicator error';
-                } else {
-                    cacheDot.className = 'dot-indicator';
-                }
-            }
+  if (match) {
+    var minorHex = parseInt(match[2], 16).toString(16);
+    if (minorHex.length < 2) minorHex = "0" + minorHex;
+    fwKey = match[1] + "." + minorHex;
+    fwNum = parseInt(match[1], 10) * 100 + parseInt(minorHex, 10);
+  }
 
-            function setCacheMsg(msg, type) {
-                cacheMessage.textContent = msg;
-                if (type === 'ok') {
-                    cacheDot.className = 'dot-indicator active';
-                } else if (type === 'error') {
-                    cacheDot.className = 'dot-indicator error';
-                } else {
-                    cacheDot.className = 'dot-indicator';
-                }
-            }
+  // دعم التجاوز اليدوي (URL Parameters)
+  var params = new URLSearchParams(location.search);
+  var forcedBug = params.get("bug");
+  var bug = null, reason = "";
 
-            function showRetry() {
-                retryBtn.style.display = 'inline-block';
-                retryBtn.onclick = function() {
-                    location.reload();
-                };
-            }
+  if (forcedBug) {
+    bug = forcedBug;
+    reason = "تحديد يدوي: " + forcedBug;
+  } else if (!fwKey) {
+    reason = "متصفح غير معروف أو ليس PS4";
+  } else if (fwNum <= 1202) {
+    bug = "lapse";
+    reason = "تحديث " + fwKey + " (متوافق مع Lapse)";
+  } else {
+    bug = "poops";
+    reason = "تحديث " + fwKey + " (متوافق مع Poops)";
+  }
 
-            const ua = navigator.userAgent;
-            const match = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(ua);
-            let fwKey = null,
-                fwNum = 0;
+  // عرض التفاصيل
+  detailsEl.innerHTML = "النظام: <b>" + (fwKey || "غير معروف") + "</b> | الثغرة: <span class='chip'>" + (bug ? bug.toUpperCase() : "لا يوجد") + "</span>";
 
-            if (match) {
-                let minorHex = parseInt(match[2], 16).toString(16);
-                if (minorHex.length < 2) minorHex = '0' + minorHex;
-                fwKey = match[1] + '.' + minorHex;
-                fwNum = parseInt(match[1], 10) * 100 + parseInt(minorHex, 10);
-            }
+  if (!bug) {
+    setStatus("إصدار الجهاز غير مدعوم", "error");
+    return;
+  }
 
-            const params = new URLSearchParams(location.search);
-            const forcedBug = params.get('bug');
-            let bug = null;
+  var targetPage = (bug === "lapse" ? "run_lapse.html" : "PS4_13.00_Webkit.html") + location.search;
 
-            if (forcedBug) {
-                bug = forcedBug;
-            } else if (!fwKey) {
-                bug = null;
-            } else if (fwNum <= 1202) {
-                bug = 'lapse';
-            } else {
-                bug = 'poops';
-            }
+  function redirect() {
+    setStatus("جارٍ تشغيل الثغرة (" + bug.toUpperCase() + ")...", "warn");
+    setTimeout(function() { location.replace(targetPage); }, 1000);
+  }
 
-            currentBug = bug;
-
-            fwDisplay.textContent = fwKey || 'غير معروف';
-
-            if (!bug) {
-                const badge = document.createElement('span');
-                badge.className = 'badge error';
-                badge.textContent = 'غير مدعوم';
-                exploitDisplay.innerHTML = '';
-                exploitDisplay.appendChild(badge);
-                setStatus('❌ هذا الإصدار غير مدعوم حالياً', 'error');
-                updateProgress(0);
-                setCacheMsg('⚠️ لا يمكن الاستمرار', 'error');
-                showRetry();
-                return;
-            }
-
-            const badge = document.createElement('span');
-            badge.className = 'badge success';
-            badge.textContent = bug.toUpperCase();
-            exploitDisplay.innerHTML = '';
-            exploitDisplay.appendChild(badge);
-
-            const targetPage = (bug === 'lapse' ? 'run_lapse.html' : 'PS4_13.00_Webkit.html') + location.search;
-
-            function executeRedirect() {
-                setStatus('🚀 جاري تشغيل الثغرة...', 'loading');
-                updateProgress(80);
-
-                let countdown = 3;
-                const interval = setInterval(() => {
-                    if (countdown > 0) {
-                        setStatus('🚀 التشغيل خلال ' + countdown + ' ثوانٍ...', 'loading');
-                        updateProgress(80 + (3 - countdown) * 6);
-                        countdown--;
-                    } else {
-                        clearInterval(interval);
-                        updateProgress(100);
-                        setStatus('✅ تم التوجيه', '');
-                        setTimeout(() => {
-                            location.replace(targetPage);
-                        }, 300);
-                    }
-                }, 800);
-            }
-
-            function handleCache() {
-                const ac = window.applicationCache;
-                if (!ac || !document.documentElement.hasAttribute('manifest')) {
-                    setCacheMsg('التخزين المؤقت: غير مفعّل (تشغيل مباشر)', '');
-                    executeRedirect();
-                    return;
-                }
-
-                ac.addEventListener('cached', function() {
-                    setCacheMsg('✅ تم التخزين للعمل بدون إنترنت', 'ok');
-                    executeRedirect();
-                });
-
-                ac.addEventListener('noupdate', function() {
-                    setCacheMsg('✅ الملفات محدثة (من التخزين)', 'ok');
-                    executeRedirect();
-                });
-
-                ac.addEventListener('error', function() {
-                    setCacheMsg('⚠️ تشغيل مباشر (فشل التخزين)', 'error');
-                    executeRedirect();
-                });
-
-                if (ac.status === ac.UPDATEREADY) {
-                    try {
-                        ac.swapCache();
-                        setCacheMsg('🔄 تم تحديث الملفات بنجاح', 'ok');
-                    } catch (e) {}
-                }
-
-                setStatus('📦 تحميل الملفات للتخزين...', 'loading');
-                updateProgress(30);
-            }
-
-            setStatus('⚡ جاهز للتشغيل، يتم التحقق من التخزين...', 'loading');
-            updateProgress(10);
-
-            setTimeout(() => {
-                updateProgress(40);
-                handleCache();
-            }, 600);
-
-        })();
-    </script>
-
+  // إدارة التخزين المؤقت Off-Line (AppCache)
+  var ac = window.applicationCache;
+  if (!ac || !document.documentElement.hasAttribute("manifest")) {
+    redirect();
+  } else if (ac.status === ac.UPDATEREADY) {
+    try { ac.swapCache(); } catch(e){}
+    cacheEl.textContent = "تم تحديث الملفات بنجاح.";
+    redirect();
+  } else {
+    ac.addEventListener("cached", function() {
+      cacheEl.textContent = "تم حفظ الصفحة للعمل بدون إنترنت (Offline Ready).";
+      cacheEl.className = "ok";
+      redirect();
+    });
+    ac.addEventListener("noupdate", function() {
+      cacheEl.textContent = "الملفات المحفوظة محدثة بالكامل.";
+      cacheEl.className = "ok";
+      redirect();
+    });
+    ac.addEventListener("error", function() {
+      cacheEl.textContent = "تشغيل مباشر (لم يتم التخزين أوفلاين).";
+      redirect();
+    });
+  }
+})();
+</script>
 </body>
 </html>
