@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v1.0 - مركز العراقى لخدمات البلايستيشن
+# Version 1.0 - Al-Iraqi PS4 Host
 
 index.html
 run_poops.html
